@@ -26,6 +26,7 @@ const CardModal = (props) => {
   };
 
   const [name,setName] = useState("");
+  //states
   const [desc,setDesc] = useState("");
   const [image,setImage] = useState("");
   const[loading,setLoading] = useState(false);
