@@ -5,9 +5,20 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url("/public/hallowen.jpg");
+  background-size: cover;          /* Scales image to cover the container */
+  background-repeat: no-repeat;     /* Prevents tiling */
+  background-position: center;      /* Centers the image */
+  width: 100vw;                     /* Full viewport width */
+  height: 100vh; 
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
