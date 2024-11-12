@@ -50,16 +50,15 @@ const CardModal = (props) => {
     setImage("");
   }
 
+
   const handleSubmit = (event) =>{
     setLoading(true);
     if(name!=="" && desc!==""){
       event.preventDefault();
       const saveData = async () => {
-        
-       
   
         try {
-            const result = await HttpPostWithAuth("/saveTaskDetails", "nikhil", "nk123",{
+            const result = await HttpPostWithAuth("/saveTaskDetails", localStorage.getItem("username"), localStorage.getItem("password"),{
               taskName:name,
               taskDesc:desc,
               taskImgPath:image,

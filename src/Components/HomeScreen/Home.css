@@ -69,4 +69,55 @@
     color: #fff
     ;
   }
+
+
+
+
+
+  .top-menu-bar {
+    position: fixed;
+    top: 0;
+    width: 82.5%;
+    height: 60px;
+    color: #f0f4ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    z-index: 10;
+  }
+  .logout{
+    color: rgba(255, 0, 0, 0.694);
+  }
+  
+  .menu-logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    flex: 1;
+  }
+  
+  .menu-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    position: absolute;
+    right: 20px;
+  }
+  
+  .menu-links li {
+    cursor: pointer;
+    font-size: 18px;
+    transition: color 0.3s;
+  }
+  
+  .menu-links li:hover {
+    color: #f0f4ff;
+  }
+  
+  /* Adjustments for the main content to account for the fixed top menu */
+  .home-container {
+    padding-top: 80px; /* Extra space to prevent content from being hidden by the fixed menu */
+  }
   

@@ -3,9 +3,13 @@ import './Home.css';
 import MultiActionAreaCard from '../Cards/MultiActionAreaCard';
 import { HttpGetWithAuth } from '../../Utils/HttpGetWithAuth';
 import CardModal from '../Cards/CardModal';
+import { useNavigate } from 'react-router-dom';
 
 
 const Home = () => {
+  
+
+  const navigate = useNavigate();
 
   const [data,setData] = useState([]);
   const [open,setOpen]  = useState(false);
@@ -23,7 +27,7 @@ const Home = () => {
    
     console.log("step 2")
     
-    const result = await HttpGetWithAuth("/getTaskDetails", "nikhil", "nk123");
+    const result = await HttpGetWithAuth("/getTaskDetails",  localStorage.getItem("username"), localStorage.getItem("password"));
     
     if(result){
       setData(result.tasks)
@@ -43,8 +47,23 @@ const Home = () => {
     fetchTasksRecord();
   }
 
+  const handleLogout = ()=>{
+    localStorage.clear();
+    navigate("/")
+  }
+    
+
    
   return (
+    <>
+     {/* Top Menu Bar */}
+     <nav className="top-menu-bar">
+        <div className="menu-logo">Task Organizer App</div>
+        <ul className="menu-links">
+          <li>Welcome {localStorage.getItem("username")} !!!</li>
+          <li onClick={()=>{handleLogout()}} className='logout'>Logout</li>
+        </ul>
+      </nav>
     <div className="home-container">
     {/* Top Section for "Add New" */}
     <div className="top-section">
@@ -72,6 +91,7 @@ const Home = () => {
       </div>
     </div>
   </div>
+  </>
   )
 }
 

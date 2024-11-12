@@ -54,9 +54,12 @@ const Login = () =>{
             username:usernameText,
             password:password
           });
-          if(result == Authentication.success){
+          if(result === Authentication.success){
+            localStorage.setItem("username",usernameText)
+            localStorage.setItem("password",password)
                navigate('/home')
                setInvalidCred(false)
+              
           }
       } catch (error) {
         setInvalidCred(true);

@@ -9,15 +9,18 @@ import CardActions from '@mui/material/CardActions';
 import { HttpGetWithAuth } from '../../Utils/HttpGetWithAuth';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import About from '../About/About';
 
 export default function MultiActionAreaCard(props) {
+
+  const navigate = useNavigate();
 
    const handleDelete = (id) =>{
 
      const deleteTask = async (id) => {
        
     try {
-      const result = await HttpGetWithAuth(`/deleteTaskDetails/${id}`, "nikhil", "nk123");
+      const result = await HttpGetWithAuth(`/deleteTaskDetails/${id}`, localStorage.getItem("username"), localStorage.getItem("password"));
       if(result === "SUCCESS"){
           console.log("success")
           props.reload();
@@ -30,6 +33,11 @@ export default function MultiActionAreaCard(props) {
 
       deleteTask(id);
    };
+
+
+   const handleAboutPage = (id) =>{
+       navigate("/about" , { state: { id: id } })
+   }  
  
 
   return (
@@ -52,7 +60,7 @@ export default function MultiActionAreaCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button onClick={()=>{handleAboutPage(props.id)}} size="small" color="primary">
           Open
         </Button>
         <Button onClick={()=>{handleDelete(props.id)}} size="small" color="error">
