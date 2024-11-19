@@ -16,24 +16,21 @@ const Home = () => {
   
 
   useEffect(()=>{
-    console.log("step1")
-      fetchTasksRecord();
     
+      fetchTasksRecord();
     
   },[open])
 
 
   const fetchTasksRecord = async () =>{
    
-    console.log("step 2")
-    
     const result = await HttpGetWithAuth("/getTaskDetails",  localStorage.getItem("username"), localStorage.getItem("password"));
     
     if(result){
       setData(result.tasks)
       console.log("tasks = "+result.tasks)
     }
-    
+
   }
 
   const handleOpen = () =>{
@@ -70,7 +67,7 @@ const Home = () => {
       <div className="add-card">
         <h2>Create a new task item</h2>
         <button onClick={handleOpen} className="add-button">+ Add</button>
-       <CardModal open={open} handleClose={handleClose}/>
+       <CardModal module={"task"}open={open} handleClose={handleClose}/>
       </div>
     </div>
 

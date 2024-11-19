@@ -35,8 +35,8 @@ export default function MultiActionAreaCard(props) {
    };
 
 
-   const handleAboutPage = (id) =>{
-       navigate("/about" , { state: { id: id } })
+   const handleAboutPage = (id,img) =>{
+       navigate("/about" , { state: { id: id ,img:img} })
    }  
  
 
@@ -60,7 +60,7 @@ export default function MultiActionAreaCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button onClick={()=>{handleAboutPage(props.id)}} size="small" color="primary">
+        <Button onClick={()=>{handleAboutPage(props.id , props.img)}} size="small" color="primary">
           Open
         </Button>
         <Button onClick={()=>{handleDelete(props.id)}} size="small" color="error">

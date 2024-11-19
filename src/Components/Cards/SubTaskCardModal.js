@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const CardModal = (props) => {
+const SubCardModal = (props) => {
   const style = {
     position: 'absolute',
     top: '50%',
@@ -25,48 +25,58 @@ const CardModal = (props) => {
 
   };
 
-  const [name,setName] = useState("");
+  const [subtaskname,setSubTaskName] = useState("");
   //states
-  const [desc,setDesc] = useState("");
-  const [image,setImage] = useState("");
+  const [subTaskdesc,setSubTaskDesc] = useState("");
+  const [Priority,setPriority] = useState("");
+  const[totalTime,setTotalTime] = useState("");
   const[loading,setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleNameChange = (event)=> {
-      setName(event.target.value);
+      setSubTaskName(event.target.value);
   }
 
   const handleDescChange=(event)=>{
-    setDesc(event.target.value);
+    setSubTaskDesc(event.target.value);
   }
 
-  const handleImagePath = (event)=>{
-    setImage(event.target.value);
+  const handlePriority = (event)=>{
+    setPriority(event.target.value);
+  }
+
+  const handleTotalTime=(event)=>{
+    setTotalTime(event.target.value)
   }
 
   const reset = () =>{
-    setName("");
-    setDesc("");
-    setImage("");
+    setSubTaskName("");
+    setSubTaskDesc("");
+    setPriority("");
+    setTotalTime("");
   }
 
 
   const handleSubmit = (event) =>{
     setLoading(true);
-    if(name!=="" && desc!==""){
+    if(subtaskname!=="" && subTaskdesc!==""){
       event.preventDefault();
       const saveData = async () => {
   
         try {
-            const result = await HttpPostWithAuth("/saveTaskDetails", localStorage.getItem("username"), localStorage.getItem("password"),{
-              taskName:name,
-              taskDesc:desc,
-              taskImgPath:image,
+            const result = await HttpPostWithAuth("/saveSubTaskItem", localStorage.getItem("username"), localStorage.getItem("password"),{
+              subTaskName:subtaskname,
+              subTaskDesc:subTaskdesc,
+              fkTaskId:props.id,
+              priority:Priority,
+              totalEstimatedTime:totalTime,
+              createdBy:localStorage.getItem("username")
             });
            if(result == "SUCCESS"){
             props.handleClose();
             reset();
-            navigate('/home');
+            props.reload();
+          
 
            }
         } catch (error) {
@@ -92,17 +102,16 @@ const CardModal = (props) => {
   >
     <Box sx={style}>
       <Typography id="modal-modal-title" variant="h6" component="h2">
-      {console.log(props.module)}
       {props.module == "subtask" ? " Create a new sub task item !!!" :  "Create a task item !!!"}
      
       </Typography>
       <Typography id="modal-modal-description" sx={{ mt: 2 }}>
       
-      <TextField  value={name} onChange={handleNameChange} sx={{ mb: 2 , }}  id="outlined-basic" label="Task Title" variant="outlined" />
-      <TextField  value={desc} onChange={handleDescChange} fullWidth sx={{ mb: 2}}  id="outlined-basic" label="Task Description" variant="outlined" />
-      <TextField  value={image} onChange={handleImagePath} fullWidth sx={{ mb: 2}}  id="outlined-basic" label="Image Path" variant="outlined" />
+      <TextField  value={subtaskname} onChange={handleNameChange} sx={{ mb: 2 , }}  id="outlined-basic" label="Sub Task Title" variant="outlined" />
+      <TextField  value={subTaskdesc} onChange={handleDescChange} fullWidth sx={{ mb: 2}}  id="outlined-basic" label="Sub Task Description" variant="outlined" />
+      <TextField  value={Priority} onChange={handlePriority} fullWidth sx={{ mb: 2}}  id="outlined-basic" label="Priority" variant="outlined" />
+      <TextField  value={totalTime} onChange={handleTotalTime} fullWidth sx={{ mb: 2}}  id="outlined-basic" label="Total Estimated Time" variant="outlined" />
       <div className='submit-container'>
-      <button style={{ width: '190px' }} className="add-button">+ Add sub tasks</button>
       <button onClick={handleSubmit} className="add-button">Create</button>
       </div>
      
@@ -115,4 +124,4 @@ const CardModal = (props) => {
   )
 }
 
-export default CardModal;
+export default SubCardModal;
