@@ -7,6 +7,7 @@ import './CardModal.css';
 import { HttpPostWithAuth } from '../../Utils/HttpGetWithAuth';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from 'react-router-dom';
+import { FormControl, InputLabel, Select, MenuItem } from '@mui/material'; // Import Material-UI components
 
 
 
@@ -109,7 +110,21 @@ const SubCardModal = (props) => {
       
       <TextField  value={subtaskname} onChange={handleNameChange} sx={{ mb: 2 , }}  id="outlined-basic" label="Sub Task Title" variant="outlined" />
       <TextField  value={subTaskdesc} onChange={handleDescChange} fullWidth sx={{ mb: 2}}  id="outlined-basic" label="Sub Task Description" variant="outlined" />
-      <TextField  value={Priority} onChange={handlePriority} fullWidth sx={{ mb: 2}}  id="outlined-basic" label="Priority" variant="outlined" />
+      <FormControl fullWidth sx={{ mb: 2 }}>
+      <InputLabel id="priority-label">Priority</InputLabel>
+      <Select
+        labelId="priority-label"
+        id="priority-select"
+        value={Priority}
+        onChange={handlePriority}
+        label="Priority"
+        variant="outlined"
+      >
+        <MenuItem value="High">High</MenuItem>
+        <MenuItem value="Med">Medium</MenuItem>
+        <MenuItem value="Low">Low</MenuItem>
+      </Select>
+    </FormControl>
       <TextField  value={totalTime} onChange={handleTotalTime} fullWidth sx={{ mb: 2}}  id="outlined-basic" label="Total Estimated Time" variant="outlined" />
       <div className='submit-container'>
       <button onClick={handleSubmit} className="add-button">Create</button>

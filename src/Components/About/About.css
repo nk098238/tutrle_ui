@@ -14,18 +14,17 @@
 .st-top-section {
   display: flex;
   justify-content: center;
-  align-items:end;
+  align-items: end;
   margin: 20px;
   width: 700px;
   max-width: 700px;
   min-width: 700px;
- 
 }
 
 .st-add-card {
-  display: flex; /* Align children side by side */
-  align-items: center; /* Vertically center align items */
-  justify-content: space-between; /* Space out the image and text/button */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: #ffffff;
   padding: 20px;
   border-radius: 8px;
@@ -33,130 +32,23 @@
   text-align: center;
   width: 550px;
   max-width: 550px;
-} 
-
-/* Cards container - vertical layout with scroll snapping */
-.st-cards-container {
-  display: flex;
-  flex-direction: column; /* Stack the cards vertically */
-  width: 100%;
-  height: 100%; /* Take remaining height after the top section */
-  overflow-y: auto; /* Allow vertical scrolling */
-  padding: 20px;
-  margin-top: 20px;
-  scroll-snap-type: y mandatory; /* Enable snap scrolling */
-  gap: 20px; /* Space between cards */
-  box-sizing: border-box;
-}
-
-/* Each card takes full width and snaps into view */
-.card {
-  width: 1300px; /* Each card spans full width */
-  max-width: 200%; /* Ensure no overflow */
-  height: 50vh; /* Set a fixed height for each card */
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  box-sizing: border-box;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  scroll-snap-align: start; /* Snap the card to the top of the viewport */
-  transition: transform 0.2s ease-in-out;
-  text-align: center;
-}
-
-/* Hover effect for cards */
-.card:hover {
-  transform: scale(1.05);
-}
-
-/* Card content styling */
-.card h3 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.card p {
-  font-size: 1rem;
-  color: #555;
-}
-
-/* Scrollbar customization */
-.cards-container::-webkit-scrollbar {
-  width: 10px;
-}
-
-.cards-container::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 5px;
-}
-
-.cards-container::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-.st-add-button {
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 20px;
-}
-
-/* Back button container */
-.back-button-container {
-  width: 100%; /* Full width of the viewport */
-  position: fixed; /* Fixed at the top of the page */
-  top: 0; /* Position at the very top */
-  left: 0; /* Align to the left edge */
-  padding: 10px 20px; /* Add some padding for aesthetics */
- 
-  z-index: 1000; /* Ensure it stays above other elements */
-  display: flex; /* Flexbox for alignment */
-  align-items: center; /* Center vertically */
-  box-sizing: border-box; /* Include padding in width calculation */
-}
-
-/* Back button styling */
-.back-button {
-  background-color: #007bff;
-  color: #ffffff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.back-button:hover {
-  background-color: #0056b3;
 }
 
 .st-pic {
   width: 190px;
   height: 50%;
-  flex-shrink: 0; /* Prevent the image from shrinking */
-  margin-right: 20px; /* Add spacing between image and text */
+  flex-shrink: 0;
+  margin-right: 20px;
 }
 
 .st-add-card h2 {
-  flex-grow: 1; /* Allow the text to take up remaining space */
+  flex-grow: 1;
   font-size: 1.5rem;
-  text-align: left; /* Align text to the left */
+  text-align: left;
 }
 
 .st-add-button {
-  margin-top: 0; /* Remove margin to align with text */
+  margin-top: 0;
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
@@ -164,4 +56,168 @@
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+}
+.st-log-effort {
+  margin-top: 0;
+  padding: 2px 2px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.st-cards-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 20px;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.subtask-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  cursor: pointer;
+  max-height: 1500px;
+  width: 1200px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: max-height 0.3s ease-out;
+}
+
+.subtask-card.expanded {
+  max-height: 2000px;
+}
+
+.subtask-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ddd;
+}
+
+.sub-subtask-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1;
+}
+
+.subtask-header h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.subtask-header h4 {
+  margin: 5px 0;
+  font-size: 14px;
+  text-align: left;
+  color: #666;
+}
+
+.priority-yellow {
+  background-color: #f1c40f;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+.priority-red{
+  background-color: rgba(228, 23, 23, 0.866);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+.priority-blue{
+  background-color: #5bb34a;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.expand-icon {
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.subtask-details {
+  margin-top: 12px;
+  padding: 16px;
+}
+
+.sub-subtask-section {
+  margin-top: 20px;
+  padding-top: 12px;
+  border-top: 2px solid #ddd;
+}
+
+.sub-subtask-section h5 {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.sub-subtask-section ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.sub-subtask-section ul li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 12px; /* Add space between each sub-subtask */
+}
+
+.sub-subtask-item .subtask-name {
+  background-color: #f1f1f1;
+  padding: 8px 12px;
+  border-radius: 4px;
+  width: 60%;
+}
+
+.add-module .subtask-name{
+  background-color: #007bff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 28px;
+  color: #333;
+  width: 60%;
+}
+
+.time-bar-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 35%;
+  align-items: flex-end;
+}
+
+.time-bar {
+  width: 100%;
+  margin-top: 4px;
+}
+
+label {
+  font-size: 14px;
+  color: #333;
+}
+.efforts{
+  display: flex;
+  flex-direction: row;
+  gap:10px;
 }
