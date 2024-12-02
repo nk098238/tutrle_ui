@@ -33,6 +33,19 @@ const LogModal = (props) => {
     const handleLoggedEffort = (event) =>{
         setLoggedHour(event.target.value);
     }
+
+    const handleLogFunction = async () =>{
+      
+      const result = await HttpPostWithAuth("/logEffort", localStorage.getItem("username"), localStorage.getItem("password"),{
+        timeLogged:loggedHour,
+        moduleId:props.moduleId
+      });
+
+    if(result && result === "SUCCESS"){
+      props.handleClose();
+    }
+
+    }
   
 
   return (
@@ -60,7 +73,7 @@ const LogModal = (props) => {
        Hours Remaining To Log : {props.remainingHours}
       </Typography>
       <div className='submit-container'>
-      <button  className="add-button">Log</button>
+      <button  onClick={()=>{handleLogFunction()}} className="add-button">Log</button>
       </div>
       </Typography>
       

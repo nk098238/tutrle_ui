@@ -22,7 +22,6 @@ const About = () => {
 
 
   const handleModuleClose = () =>{
-    console.log("clickedrr")
     setOpenModuleForm(false);
   }
 
@@ -52,6 +51,7 @@ const About = () => {
 
   const handleCloseLogModal=()=>{
     setOpenLogModal(false);
+    handleReload();
   }
 
   const handleNewModule= () =>{
@@ -81,7 +81,7 @@ const About = () => {
 
     if (result) {
       setData(result);
-      console.log(result)
+     
     }
   };
 
@@ -146,6 +146,7 @@ const About = () => {
                   {/* Example list of sub-subtasks */}
                   <ul>
                     {subtaskList?.map((subSubtask, subIndex) => (
+                      
                       <li key={subIndex} className="sub-subtask-item">
                         <div className="subtask-name">
                           {subSubtask.moduleName}
@@ -156,7 +157,7 @@ const About = () => {
                           <label>Total Effort Required: {subSubtask.totalEstimated || 0} hours</label>
                           </div>
                           <button onClick={handleLogModal} className="st-log-effort">+ Log</button>
-                          <LogModal totalEffort = {subSubtask.totalEstimated} remainingHours={subSubtask.totalEstimated - subSubtask.TimeLogged} open={openlogModal} handleClose={handleCloseLogModal}/>
+                          <LogModal moduleId={subSubtask.Id} totalEffort = {subSubtask.totalEstimated} remainingHours={subSubtask.totalEstimated - subSubtask.TimeLogged} open={openlogModal} handleClose={handleCloseLogModal}/>
                           <input
                             type="range"
                             min="0"
