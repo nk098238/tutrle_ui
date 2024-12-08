@@ -18,7 +18,7 @@ const ProtectedRoute = (props) => {
     }
     
     // If authenticated, render the child components (e.g., /home page)
-    console.log(props.element)
+  
     return props.element;
   };
 

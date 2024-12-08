@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Login.css';
 import { HttpPostWithAuth } from '../../Utils/HttpGetWithAuth';
 import { Authentication } from '../Constants';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 
 const Login = () =>{
 
@@ -11,6 +11,19 @@ const Login = () =>{
   const[password,setPassword] = useState("");
   const[InvalidCred,setInvalidCred] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+  const [userAddFlag, setUserAddFlag] = useState(false);
+  const [globalMsg,setGlobalMsg] = useState("");
+
+  const { msg } = location.state || {};
+
+  useEffect(()=>{
+    if(msg == "alraedy have account"){
+      setGlobalMsg("")
+    }else if(msg == "user added succesfully"){
+    setGlobalMsg("User created successfully! Please log in to access your account.")
+    }
+  },[msg])
 
   useEffect(()=>{
     checkdisabledLogin();
@@ -21,6 +34,10 @@ const Login = () =>{
           setUsernameText(event.target.value);
         }
   
+  }
+
+  const handleSingUp = (event) =>{
+      navigate("/singup")
   }
 
   const handlePassword = (event) =>{
@@ -58,11 +75,12 @@ const Login = () =>{
             localStorage.setItem("username",usernameText)
             localStorage.setItem("password",password)
                navigate('/home')
-               setInvalidCred(false)
+               setGlobalMsg("");
+              
               
           }
       } catch (error) {
-        setInvalidCred(true);
+        setGlobalMsg("Login failed! Incorrect username or password.")
         resetCred();
       }
   };
@@ -81,15 +99,14 @@ const Login = () =>{
         <div className='input-box'>
           <input type='password' placeholder='Password' value={password} onChange={handlePassword} required></input>
         </div>
-        <div className='remember-forgot'>
+        {/* <div className='remember-forgot'>
              <label><input type='checkbox'/>Remember me</label>
              <a href='#'></a>
-        </div>
+        </div> */}
         <button type='submit' disabled={disableLogin} onClick={handleSubmit}>Login</button>
+        <button type='submit'  onClick={handleSingUp}>Sign up</button>
       </form>
-      {InvalidCred && <div>
-        <label className='label'>Login failed! Incorrect username or password.</label>
-        </div>}
+      <div><label className='label'>{globalMsg}</label> </div>
     </div>
     </div>
   )

@@ -28,7 +28,7 @@ const Home = () => {
     
     if(result){
       setData(result.tasks)
-      console.log("tasks = "+result.tasks)
+     
     }
 
   }
@@ -79,7 +79,7 @@ const Home = () => {
         {
          
           Object.values(data).map((value,index)=>{
-            console.log(value)
+      
             return(
               <div  >{<MultiActionAreaCard name={value.taskName}  desc={value.taskDesc} img={value.taskImgPath} id={value.taskId} reload={reload} />}</div>
             ) 

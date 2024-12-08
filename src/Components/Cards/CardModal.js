@@ -92,7 +92,7 @@ const CardModal = (props) => {
   >
     <Box sx={style}>
       <Typography id="modal-modal-title" variant="h6" component="h2">
-      {console.log(props.module)}
+     
       {props.module == "subtask" ? " Create a new sub task item !!!" :  "Create a task item !!!"}
      
       </Typography>

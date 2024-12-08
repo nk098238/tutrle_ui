@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./About.css";
 import { HttpGetWithAuth,HttpPostWithAuth } from "../../Utils/HttpGetWithAuth";
-import CardModal from "../Cards/CardModal";
 import CardMedia from '@mui/material/CardMedia';
 import SubCardModal from "../Cards/SubTaskCardModal";
 import ModulesModal from "../Cards/ModulesModal";
@@ -19,6 +18,7 @@ const About = () => {
   const [subtaskList,setSubtaskList] = useState([]);
   const [openModuleForm,setOpenModuleForm] = useState(false);
   const [openlogModal,setOpenLogModal] = useState(false);
+  const [activeModuleId,setActiveModuleId] = useState(0);
 
 
   const handleModuleClose = () =>{
@@ -45,7 +45,8 @@ const About = () => {
   };
 
   
-  const handleLogModal = () =>{
+  const handleLogModal = (id) =>{
+    setActiveModuleId(id);
     setOpenLogModal(true)
   }
 
@@ -55,7 +56,6 @@ const About = () => {
   }
 
   const handleNewModule= () =>{
-    console.log("add a new module");
     setOpenModuleForm(true);
    
   }
@@ -156,8 +156,8 @@ const About = () => {
                           <label>Logged Effort: {subSubtask.TimeLogged || 0} hours</label>
                           <label>Total Effort Required: {subSubtask.totalEstimated || 0} hours</label>
                           </div>
-                          <button onClick={handleLogModal} className="st-log-effort">+ Log</button>
-                          <LogModal moduleId={subSubtask.Id} totalEffort = {subSubtask.totalEstimated} remainingHours={subSubtask.totalEstimated - subSubtask.TimeLogged} open={openlogModal} handleClose={handleCloseLogModal}/>
+                          <button onClick={()=>handleLogModal(subSubtask.Id)} className="st-log-effort">+ Log</button>
+                          <LogModal moduleId={activeModuleId} totalEffort = {subSubtask.totalEstimated} remainingHours={subSubtask.totalEstimated - subSubtask.TimeLogged} open={openlogModal} handleClose={handleCloseLogModal}/>
                           <input
                             type="range"
                             min="0"

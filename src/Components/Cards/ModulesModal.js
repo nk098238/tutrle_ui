@@ -38,7 +38,7 @@ const ModulesModal = (props) => {
         setTotalTime(event.target.value);
     }
     const handleCreateModules = async () =>{
-        console.log("inside savemodules")
+    
         const result = await HttpPostWithAuth("/saveModule", localStorage.getItem("username"), localStorage.getItem("password"),{
             moduleName:moduleName,
             fkSubTaskId:props.fkSubtaskId,
