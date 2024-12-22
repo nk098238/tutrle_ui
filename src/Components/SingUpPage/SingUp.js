@@ -67,9 +67,10 @@ const SignUp = () => {
     
   }
   const handlePhone = (event) => {
-    if(isNumber(event.target.value) || event.target.value === ''){
-        setPhone(event.target.value);
-    }
+    if (isNumber(event.target.value) || event.target.value === '') {
+      const numericValue = event.target.value === '' ? '' : parseInt(event.target.value, 10);
+      setPhone(numericValue);
+  }
     
     
   }
@@ -87,11 +88,16 @@ const SignUp = () => {
       try {
         // Assuming your backend API has a registration endpoint
         const result = await HttpPostWithAuth("/register", "nikhil", "nk123", {
-          username: usernameText,
+          // username: usernameText,
+          // password: password,
+          // firstName: firstnameText,
+          // lastName: lastnameText,
+          // phone: phone
           password: password,
           firstName: firstnameText,
           lastName: lastnameText,
-          phone: phone
+          phone: 7684,
+          username: usernameText
         });
 
         if (result === 'SUCCESS') {
@@ -111,16 +117,20 @@ const SignUp = () => {
   const handlePasswordBlur = () => {
       if(!validatePassword(password)){
         setMsg("Password should be the combination of atleast one uppercase , one special character and one digit")
+        setDisableSignUp(true);
       }else{
         setMsg("")
       }
   }
 
   const handleConfirmPasswordBlur = () =>{
-    if(password == confirmPassword){
+    if(password == confirmPassword && validatePassword(password)){
         setMsg("")
+    }else if(!validatePassword(password)){
+      setMsg("Password should be the combination of atleast one uppercase , one special character and one digit")
+      setDisableSignUp(true);
     }else{
-        setMsg("Password should match")
+      setMsg("Password should match")
     }
   }
 

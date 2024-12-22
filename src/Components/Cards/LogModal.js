@@ -12,6 +12,7 @@ import { HttpPostWithAuth } from '../../Utils/HttpGetWithAuth';
 
 
 const LogModal = (props) => {
+  
    
     const style = {
         position: 'absolute',

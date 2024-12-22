@@ -52,7 +52,6 @@ const About = () => {
 
   const handleCloseLogModal=()=>{
     setOpenLogModal(false);
-    handleReload();
   }
 
   const handleNewModule= () =>{
@@ -149,7 +148,7 @@ const About = () => {
                       
                       <li key={subIndex} className="sub-subtask-item">
                         <div className="subtask-name">
-                          {subSubtask.moduleName}
+                          {<h3>{subSubtask.moduleName}</h3>}
                         </div>
                         <div className="time-bar-container">
                           <div className="efforts">
